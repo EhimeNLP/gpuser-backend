@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <title>GPUser</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'gpu_status/style.css' %}" />
+  {% if auto_reload %}
+  <meta http-equiv="refresh" content="3">
+  {% endif %}
+</head>
+
+<body>
+  <h1>GPU Status</h1>
+  <div class="container">
+    {% for gpu_server_info in result %}
+    <div class="item">
+      <h2>
+        {{ gpu_server_info.hostname }}
+        {% if gpu_server_info.gpu_info|length == 0 %}
+        <font color="black">
+          &#10067;
+        </font>
+        {% elif gpu_server_info.gpus|length == gpu_server_info.empty_gpus|length %}
+        <font color="red">
+          &#9679;
+        </font>
+        {% elif gpu_server_info.empty_gpus|length > 0 %}
+        <font color="green">
+          &#9650;
+        </font>
+        {% else %}
+        <font color="blue">
+          &#10006;
+        </font>
+        {% endif %}
+      </h2>
+      <span class="fetch_time">{{ gpu_server_info.fetch_time|date:"n月j日 H:i:s" }}</span>
+      <table class="table table-striped table table-bordered">
+        <tr>
+          <th>GPU index</th>
+          <th>pid</th>
+          <th>username</th>
+        </tr>
+        {% for gpu_info in gpu_server_info.gpu_info %}
+        <tr>
+          <td>{{ gpu_info.index }}</td>
+          <td>{{ gpu_info.pid|default_if_none:"-" }}</td>
+          <td>{{ gpu_info.user|default_if_none:"-" }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endfor %}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
