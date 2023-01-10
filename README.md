@@ -39,6 +39,12 @@ poetry run server
 python manage.py runserver
 ```
 
+データベースの起動 (with docker)
+```bash
+cp .env.example .env
+bash database.sh
+```
+
 # Note
 
 初回のみ、http://localhost:8000/admin にアクセスして、Servers にサーバー名を登録する必要があります。
