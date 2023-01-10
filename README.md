@@ -19,11 +19,27 @@
 
 # Installation
 
-Poetry を使ってインストールする
+## dependencies
 
 ```bash
 poetry install
 ```
+
+## migrate
+
+```bash
+cd gpuser-backend
+python ./manage.py migrate
+```
+
+## create superuser
+
+```bash
+python ./manage.py createsuperuser
+```
+
+## register servers
+http://localhost:8000/admin にアクセスして、Servers にサーバー名を登録
 
 # Usage
 
