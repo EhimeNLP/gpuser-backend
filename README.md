@@ -1,6 +1,8 @@
 # GPUser
 
 愛媛大学 工学部 人工知能研究室 自然言語処理グループの研究室用の GPU サーバー管理ツールです。
+![GPUser](https://user-images.githubusercontent.com/102138393/215088013-44f57c6f-f820-4a99-b4e2-48f2fa334e7e.png)
+
 
 # Features
 
